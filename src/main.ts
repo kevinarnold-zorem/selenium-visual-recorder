@@ -42,7 +42,7 @@ function createWindow() {
 }
 
 app.whenReady().then(async () => {
-    console.log('[Main] Iniciando Electron Visual Recorder...');
+    console.log('[Main] Iniciando Selenium Visual Recorder...');
     await driverManager.init();
     xpathInspector   = new XPathInspector(driverManager);
     selectorVerifier = new SelectorVerifier(driverManager);

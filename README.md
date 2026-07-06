@@ -1,4 +1,4 @@
-# Electron Visual Recorder
+# Selenium Visual Recorder
 
 Herramienta para **grabar pruebas automatizadas web sin escribir código**. Abres un panel visual, haces click sobre los elementos de la página, y el framework genera por ti los archivos `.feature` (Gherkin), los locators y los step definitions listos para ejecutarse con Cucumber + Selenium.
 

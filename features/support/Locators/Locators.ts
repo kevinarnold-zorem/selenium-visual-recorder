@@ -1,4 +1,4 @@
-// AUTO-GENERADO por Electron Visual Recorder
+// AUTO-GENERADO por Selenium Visual Recorder
 // Ordena estos locators en archivos específicos por página cuando sea necesario
 
 export const Locators = Object.freeze({

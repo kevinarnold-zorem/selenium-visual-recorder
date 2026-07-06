@@ -679,7 +679,7 @@ function buildGherkinFromEnlazar() {
         .filter(s => s.text.trim())
         .map(s => `    ${s.keyword} ${s.text.trim()}`);
     return [
-        `# Generado por Electron Visual Recorder`,
+        `# Generado por Selenium Visual Recorder`,
         `# Fecha: ${date}`,
         '',
         `Feature: ${feature}`,

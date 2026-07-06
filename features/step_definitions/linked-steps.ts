@@ -1,4 +1,4 @@
-// AUTO-GENERADO por Electron Visual Recorder
+// AUTO-GENERADO por Selenium Visual Recorder
 // Fecha: 12/6/2026, 16:17:50
 // No editar manualmente — usar el panel Enlazar para regenerar
 

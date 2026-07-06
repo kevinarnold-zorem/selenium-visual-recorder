@@ -41,7 +41,7 @@ export class FeatureGenerator {
     private buildContentFromLines(featureName: string, scenarioName: string, lines: ScenarioLine[]): string {
         const date = new Date().toLocaleString('es-PE');
         const content = [
-            `# Generado por Electron Visual Recorder (Enlazar)`,
+            `# Generado por Selenium Visual Recorder (Enlazar)`,
             `# Fecha: ${date}`,
             '',
             `Feature: ${featureName}`,
@@ -97,7 +97,7 @@ export class FeatureGenerator {
     private buildLinkedStepsContent(linkedMap: LinkedStepsMap): string {
         const date = new Date().toLocaleString('es-PE');
         const lines: string[] = [
-            `// AUTO-GENERADO por Electron Visual Recorder`,
+            `// AUTO-GENERADO por Selenium Visual Recorder`,
             `// Fecha: ${date}`,
             `// No editar manualmente — usar el panel Enlazar para regenerar`,
             ``,
@@ -211,12 +211,12 @@ export class FeatureGenerator {
             // Primera vez: crear archivo completo
             const header = isGeneric
                 ? [
-                    `// AUTO-GENERADO por Electron Visual Recorder`,
+                    `// AUTO-GENERADO por Selenium Visual Recorder`,
                     `// Ordena estos locators en archivos específicos por página cuando sea necesario`,
                     ``
                   ]
                 : [
-                    `// AUTO-GENERADO por Electron Visual Recorder`,
+                    `// AUTO-GENERADO por Selenium Visual Recorder`,
                     ``
                   ];
             const lines = [
@@ -260,7 +260,7 @@ export class FeatureGenerator {
     private buildContent(featureName: string, scenarioName: string, steps: RecordedStep[]): string {
         const date = new Date().toLocaleString('es-PE');
         const lines = [
-            `# Generado por Electron Visual Recorder`,
+            `# Generado por Selenium Visual Recorder`,
             `# Fecha: ${date}`,
             '',
             `Feature: ${featureName}`,
