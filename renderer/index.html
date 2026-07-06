@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Recorder</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-left">
+            <span class="logo">🎬</span>
+            <span class="title">Visual Recorder</span>
+        </div>
+        <div class="header-right">
+            <span class="url-label">URL:</span>
+            <input type="text" id="txtUrl" class="url-input" placeholder="https://..."/>
+            <button class="btn btn-blue" id="btnGo">▶ Ir</button>
+        </div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="main">
+
+        <!-- PANEL IZQUIERDO -->
+        <section class="panel panel-left">
+
+            <!-- INSPECTOR -->
+            <div class="section-title">🔍 INSPECTOR DE ELEMENTO</div>
+
+            <button class="btn btn-purple btn-full" id="btnInspect">
+                🖱️ Seleccionar elemento en Chrome
+            </button>
+
+            <label class="field-label">Selector / XPath:</label>
+            <div class="input-row">
+                <input type="text" id="txtSelector" class="field-input"
+                       placeholder="XPath o CSS selector..."/>
+                <button class="btn btn-dark" id="btnCopy" title="Copiar">📋</button>
+            </div>
+
+            <label class="field-label">Nombre variable:</label>
+            <input type="text" id="txtVarName" class="field-input"
+                   placeholder="ej: btn_login, input_username..."/>
+
+            <label class="field-label">Página <span style="color:var(--text3);font-weight:normal">(opcional)</span></label>
+            <input type="text" id="txtPage" class="field-input"
+                   placeholder="ej: login, checkout, home..."/>
+
+            <button class="btn btn-navy btn-full" id="btnVerify">
+                ✅ Verificar selector
+            </button>
+
+            <div id="lblVerifyResult" class="verify-result">
+                — Ingresa un selector y presiona Verificar
+            </div>
+
+            <div class="separator"></div>
+
+            <!-- STEP -->
+            <div class="section-title">⚡ DEFINIR STEP</div>
+
+            <label class="field-label">Accion:</label>
+            <select id="cmbAction" class="field-select">
+                <option value="NAVEGAR">🌐 NAVEGAR</option>
+                <option value="CLICK" selected>👆 CLICK</option>
+                <option value="ESCRIBIR">✏️ ESCRIBIR</option>
+                <option value="LIMPIAR">🧹 LIMPIAR</option>
+                <option value="SELECCIONAR">📋 SELECCIONAR</option>
+                <option value="VERIFICAR_TEXTO">✅ VERIFICAR TEXTO</option>
+                <option value="VERIFICAR_EXISTE">👁️ VERIFICAR EXISTE</option>
+                <option value="VERIFICAR_NO_EXISTE">🚫 VERIFICAR NO EXISTE</option>
+                <option value="ESPERAR">⏳ ESPERAR</option>
+                <option value="SCREENSHOT">📸 SCREENSHOT</option>
+            </select>
+
+            <label class="field-label">Valor (texto, URL o segundos):</label>
+            <input type="text" id="txtValue" class="field-input"
+                   placeholder="ej: standard_user, https://..., 2"/>
+
+            <label class="field-label">Descripcion (opcional):</label>
+            <input type="text" id="txtDesc" class="field-input"
+                   placeholder="ej: el usuario hace click en login"/>
+
+            <button class="btn btn-green btn-full btn-execute" id="btnExecute">
+                ▶ EJECUTAR Y GUARDAR STEP
+            </button>
+
+            <div class="separator"></div>
+
+            <!-- NOMBRE CASO -->
+            <div class="section-title">📄 NOMBRE DEL CASO</div>
+            <div class="input-row">
+                <div class="input-group">
+                    <label class="field-label">Feature:</label>
+                    <input type="text" id="txtFeature" class="field-input"
+                           value="Flujo grabado"/>
+                </div>
+                <div class="input-group">
+                    <label class="field-label">Scenario:</label>
+                    <input type="text" id="txtScenario" class="field-input"
+                           value="Escenario grabado"/>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- PANEL DERECHO -->
+        <section class="panel panel-right">
+
+            <!-- STEPS GRABADOS -->
+            <div class="steps-header">
+                <span class="section-title">📋 STEPS GRABADOS</span>
+                <div class="steps-actions">
+                    <button class="btn btn-red-sm" id="btnDeleteStep">🗑️ Eliminar</button>
+                    <button class="btn btn-dark-sm" id="btnClearSteps">🧹 Limpiar todo</button>
+                </div>
+            </div>
+
+            <ul id="lstSteps" class="steps-list">
+                <li class="step-empty">Sin steps grabados aun...</li>
+            </ul>
+
+            <div class="separator"></div>
+
+            <!-- PREVIEW GHERKIN -->
+            <div class="section-title">👁️ PREVIEW GHERKIN</div>
+            <textarea id="txtGherkin" class="gherkin-preview" readonly
+                      placeholder="# El Gherkin aparece aqui..."></textarea>
+
+            <!-- BOTONES FINALES -->
+            <div class="btn-row">
+                <button class="btn btn-navy btn-third" id="btnPreview">
+                    👁️ Actualizar Preview
+                </button>
+                <button class="btn btn-orange btn-third" id="btnEnlazar">
+                    🔗 Enlazar
+                </button>
+                <button class="btn btn-green btn-third" id="btnGenerate">
+                    💾 GENERAR ARCHIVOS
+                </button>
+            </div>
+
+            <div id="lblGenerateResult" class="generate-result"></div>
+
+        </section>
+
+    </main>
+
+    <!-- ENLAZAR PANEL (oculto por defecto) -->
+    <div id="enlazarPanel" class="enlazar-panel">
+
+        <div class="enlazar-header">
+            <span class="enlazar-title">🔗 ENLAZAR STEPS AL ESCENARIO</span>
+            <button class="btn btn-dark" id="btnEnlazarCancelar">✕ Cancelar</button>
+        </div>
+
+        <div class="enlazar-body">
+
+            <!-- IZQUIERDA: steps grabados disponibles -->
+            <div class="enlazar-left">
+                <div class="section-title" style="margin-bottom:6px">📋 STEPS GRABADOS</div>
+                <ul id="lstEnlazarDisponibles" class="enlazar-available-list"></ul>
+            </div>
+
+            <!-- DERECHA: constructor de escenario -->
+            <div class="enlazar-right">
+                <div class="enlazar-right-header">
+                    <span class="section-title">🎬 CONSTRUCTOR DE ESCENARIO</span>
+                    <div style="display:flex;gap:6px">
+                        <button class="btn btn-blue btn-sm" id="btnAddScenarioStep">+ Nuevo Step</button>
+                        <button class="btn btn-dark btn-sm" id="btnNuevoEscenario" title="Limpiar y empezar un escenario nuevo">🗑 Nuevo</button>
+                    </div>
+                </div>
+                <div id="scenarioBuilder" class="scenario-builder"></div>
+            </div>
+
+        </div>
+
+        <div class="enlazar-footer">
+            <button class="btn btn-green btn-confirm" id="btnEnlazarConfirmar">
+                ✅ Confirmar Escenario
+            </button>
+        </div>
+
+    </div>
+
+    <!-- STATUS BAR -->
+    <footer class="statusbar">
+        <span id="lblStatus">✓ Iniciando...</span>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

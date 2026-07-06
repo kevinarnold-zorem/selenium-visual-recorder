@@ -1,0 +1,9 @@
+{
+  "default": {
+    "require": ["features/step_definitions/*.ts"],
+    "requireModule": ["ts-node/register"],
+    "paths": ["recorded/features/**/*.feature"],
+    "format": ["progress-bar", "html:recorded/reports/report.html"],
+    "publishQuiet": true
+  }
+}
